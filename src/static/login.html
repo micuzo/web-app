@@ -4,16 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="login.css">
     <title>Bookstore</title>
 </head>
 <body>
     <h1>Bookstore</h1>
-    <div>
-        <h3 id="boxTitle">Login</h3>
-        <input type="text"/>
-        <input type="password"/>
+    <div id="loginBox">
+        <h3 id="loginBoxTitle">Login</h3>
+        <div class="inputContainer">
+            <label for="email">email</label>
+            <input type="text" name="email"/>
+        </div>
+        <div class="inputContainer">
+            <label for="password">password</label>
+            <input type="password"/>
+        </div>
     </div>
-    <button>Login</button>
-    <p>Register</p>
+    <button id="confirmButton">Login</button>
+    <button id="toggleButton">Register</button>
 </body>
 </html>
