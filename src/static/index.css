@@ -8,7 +8,7 @@
     src: url(Ruda.ttf);
 }
 
-p, h3{
+p, h3, h2{
     font-family: Ruda;
 }
 
@@ -46,4 +46,16 @@ h1{
     background: #FFFFFF;
     border: 1px solid #424136;
     color: #4F4F4F;
+}
+
+.btn-collapse{
+    font-size: 72px;
+    color: #323232;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.bold{
+    font-weight: bold;
 }
