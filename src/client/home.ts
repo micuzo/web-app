@@ -4,8 +4,13 @@ const dummy = {
     ISBN: "9332HBS"
 }
 
-const createAddToCartButton  = () => {
+const bookListItems = [];
 
+const search = (event) => {
+    const searchText = (document.querySelector("#searchInput") as HTMLInputElement).value;
+    //document.querySelector("#bookList").innerHTML = "";
+    bookListItems.push(createBookListItemSm());
+    console.log(searchText);
 }
 
 const createBookListItemSm = () => {
@@ -24,7 +29,13 @@ const createBookListItemSm = () => {
         className: "li-left-col"
     })
     
-    const bookImg = basicElement({type: "img", parent: leftCol});
+    const rand = Math.floor(Math.random() * 3 + 1);
+    const bookImg = basicElement({
+        type: "img", 
+        parent: leftCol,
+        src: `/static/images/book-${rand}.png`,
+        className: "li-img-sm"
+    });
     
     const info = basicElement({
         type: "div",
@@ -63,9 +74,20 @@ const createBookListItemSm = () => {
     //Append info table
     root.appendChild(containerSm);
 
+    return containerSm;
 }
 
 window.onload = () => {
     //fetch from db
+    //createBookListItemSm();
+    const root = document.querySelector("#bookList");
     createBookListItemSm();
+    return;
+    root.appendChild(basicElement({
+        type: "img",
+        parent: root,
+        src: "static/images/search-placeholder.png",
+        id: "search-placeholder-img"
+    }));
+
 }

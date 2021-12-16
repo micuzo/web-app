@@ -3,8 +3,18 @@
     src: url(RubikOne.ttf);
 }
 
+@font-face {
+    font-family: Ruda;
+    src: url(Ruda.ttf);
+}
+
+p, h3{
+    font-family: Ruda;
+}
+
 body{
     margin: 0;
+    height: 100%;
 }
 
 h1{

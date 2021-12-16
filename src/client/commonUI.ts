@@ -3,7 +3,8 @@ interface BasicElConfig {
     parent: any,
     className?: string,
     id?: string,
-    innerHTML?: string
+    innerHTML?: string,
+    src?: string
 }
 
 enum ButtonType {
