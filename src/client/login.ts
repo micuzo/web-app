@@ -18,3 +18,8 @@ const confirmAction = () => {
         //Register user to the database
     }
 }
+
+window.onload = () => {
+    //Check for a current user if yes?
+    //redirect dashboard
+}
