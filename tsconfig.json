@@ -1,0 +1,7 @@
+{
+    "include": ["src/**/*"],
+    "compilerOptions": {
+        "outDir": ".js",
+        "target": "ES5"
+    }
+}
