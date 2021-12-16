@@ -38,12 +38,6 @@ body{
     align-items: center;
 }
 
-h1{
-    font-size: 86px;
-    font-family: RubikOne;
-    color: #424136;
-}
-
 #loginBox input{
     position: static;
     width: 350px;

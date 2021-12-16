@@ -12,6 +12,10 @@ app.get('/', (req, res) => {
     res.sendFile("src/static/login.html", {root: process.cwd()});
 });
 
+app.get('/home', (req, res) => {
+    res.sendFile("src/static/home.html", {root: process.cwd()});
+}) 
+
 
 app.listen(port, () => {
     console.log("Now listening on port 3000");
