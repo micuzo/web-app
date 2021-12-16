@@ -13,10 +13,13 @@ const togglePageState = () => {
 const confirmAction = () => {
     if (isLogin) {
         //redirect to dashboard with user
+        
     }
     else {
         //Register user to the database
     }
+
+    window.location.href = "/home";
 }
 
 window.onload = () => {
