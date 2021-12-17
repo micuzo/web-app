@@ -12,6 +12,11 @@ const setItem = (key, val) => storage.setItem(key, JSON.stringify(val));
 
 const getUser = () => JSON.parse(storage.getItem("user"));
 const setUser = (user?) => storage.setItem("user", user ? JSON.stringify(user) : JSON.stringify(dummyUser));
+const logout = () => {
+    if (!confirm("Are you sure you want to log out?") || !getUser()) return;
+    storage.clear();
+    window.location.href = "/";
+}
 
 const initCart = () => setItem("cart", []);
 const getCart = () => getItem("cart");
@@ -28,6 +33,7 @@ const removeFromCart = (ISBN: number) => {
 const store = {
     getUser,
     setUser,
+    logout,
     initCart,
     addToCart,
     removeFromCart,

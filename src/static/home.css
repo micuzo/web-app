@@ -16,7 +16,7 @@
     display: flex;
 }
 
-#navbar a{
+#navbar a,button{
     font-family: Ruda;
     font-style: normal;
     font-weight: normal;
@@ -24,10 +24,10 @@
     text-align: center;
     color: #323232;
     margin-right: 50px;
+    margin-left: 0px;
     cursor: pointer;
-}
-
-.navLinkSm{
+    background-color: transparent;
+    border: none;
     text-decoration-line: underline;
 }
 
