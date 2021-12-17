@@ -1,10 +1,3 @@
-const dummy = {
-    Author: "Suzanne Collins",
-    Genre: "Romance",
-    ISBN: "9332HBS",
-    Publisher: "Scholastic Press",
-    NumPages: 374
-}
 const bookListItems = [];
 
 const search = (event) => {
@@ -14,7 +7,7 @@ const search = (event) => {
     console.log(searchText);
 }
 
-const createBookListItemSm = (book:any) => {
+const createBookListItemSm = (book:Book) => {
 
     const containerSm = basicElement({
         type: "div",
@@ -46,19 +39,19 @@ const createBookListItemSm = (book:any) => {
     const title = basicElement({
         type: "h3",
         parent: info,
-        innerHTML: "The Hunger Games"
+        innerHTML: book.name
     });
     
     const author = basicElement({
         type: "p",
         parent: info,
-        innerHTML: dummy.Author
+        innerHTML: book.author
     });
 
     const price = basicElement({
         type: "p",
         parent: leftCol,
-        innerHTML: "$22",
+        innerHTML: `$${book.price}`,
         className: "price"
     });
 
@@ -78,7 +71,7 @@ const createBookListItemSm = (book:any) => {
     return containerSm;
 }
 
-const createBookListItemLg = (book:any) => {
+const createBookListItemLg = (book:Book) => {
    
     const container = basicElement({
         type: "div",
@@ -109,26 +102,26 @@ const createBookListItemLg = (book:any) => {
     const title = basicElement({
         type: "h2",
         parent: info,
-        innerHTML: "The Hunger Games"
+        innerHTML: book.name
     });
 
     const author = basicElement({
         type: "p",
         parent: info,
-        innerHTML: "Suzanne Collins"
+        innerHTML: book.author
     });
 
     const genre = basicElement({
         type: "p",
         parent: info,
-        innerHTML: "Romance"
+        innerHTML: book.genre
     });
 
     const price = basicElement({
         type: "p",
         parent: info,
         className: "price",
-        innerHTML: "$22"
+        innerHTML: `$${book.price}`
     });
 
     //More Info Column
@@ -150,7 +143,7 @@ const createBookListItemLg = (book:any) => {
         className: "more-info-content"
     });
 
-    ["ISBN", "Publisher", "NumPages"].forEach((key) => {
+    ["ISBN", "publisherEmail", "numberPages"].forEach((key) => {
         const outer = basicElement({
             type: "span",
             parent: moreInfoContent,
@@ -166,7 +159,7 @@ const createBookListItemLg = (book:any) => {
         const data = basicElement({
             type: "span",
             parent: outer,
-            innerHTML: dummy[key]
+            innerHTML: book[key]
         })
     })
 
@@ -204,13 +197,10 @@ const renderList = () => {
 }
 
 window.onload = () => {
-    //fetch from db
-    //createBookListItemSm();
     const root = document.querySelector("#bookList");
-    for (let i = 0; i < 10; i++){
-        const li = createBookListItemSm({ISBN: i});
-        bookListItems.push(li);
-    }
+    dummyBooks.forEach(book => {
+        bookListItems.push(createBookListItemSm(book));
+    });
     renderList();
     return;
     root.appendChild(basicElement({
