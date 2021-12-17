@@ -23,7 +23,9 @@ const addToCart = (book) => {
 }
 const removeFromCart = (ISBN: number) => {
     const curCart = getCart();
-    setCart(curCart.filter((book) => book.ISBN === ISBN));
+    const firstOccurenceIndex = curCart.findIndex((item) => item.ISBN === ISBN);
+    curCart.splice(firstOccurenceIndex, 1)
+    setCart(curCart);
 }
 
 const store = {

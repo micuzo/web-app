@@ -10,7 +10,8 @@ interface BasicElConfig {
 
 enum ButtonType {
     PRIMARY =  "PRIMARY",
-    SECONDARY = "SECONDARY"
+    SECONDARY = "SECONDARY",
+    SECONDARY_SM = "SECONDARY_SM"
 }
 
 const basicElement = (config: BasicElConfig) => {
@@ -25,7 +26,12 @@ const basicElement = (config: BasicElConfig) => {
 }
 
 const createButton = (btnType: ButtonType, parent: any, innerHTML: string, onClick: Function) => {
-    const className = btnType === ButtonType.PRIMARY ? "btn btn-primary" : "btn btn-secondary";
+    const classMap = {
+        [ButtonType.PRIMARY]: "btn btn-primary",
+        [ButtonType.SECONDARY]: "btn btn-secondary",
+        [ButtonType.SECONDARY_SM]: "btn-sm btn-secondary"
+    };
+    const className = classMap[btnType];
     return basicElement({
         type: "button",
         parent: parent,

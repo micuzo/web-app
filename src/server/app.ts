@@ -14,7 +14,11 @@ app.get('/', (req, res) => {
 
 app.get('/home', (req, res) => {
     res.sendFile("src/static/home.html", {root: process.cwd()});
-}) 
+});
+
+app.get('/cart', (req, res) => {
+    res.sendFile("src/static/cart.html", {root: process.cwd()});
+});
 
 
 app.listen(port, () => {
