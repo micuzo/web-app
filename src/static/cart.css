@@ -44,3 +44,16 @@ h2{
 .quantity{
     margin-left: 40px;
 }
+
+#checkoutForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#checkoutForm button{
+    margin-top: 20px;
+}
+
+#buttons-container{}

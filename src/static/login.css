@@ -14,11 +14,6 @@
     margin-bottom: 30px;
 }
 
-.inputContainer{
-    display: flex;
-    flex-direction: column;
-}
-
 #loginBox h3{
     font-family: RubikOne;
     font-style: normal;

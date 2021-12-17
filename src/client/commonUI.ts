@@ -5,6 +5,7 @@ interface BasicElConfig {
     id?: string,
     innerHTML?: string,
     src?: string,
+    for?: string,
     onclick?: Function
 }
 
@@ -94,4 +95,9 @@ const createCartItem = (book:Book, count:number, hasRemoveButton: boolean = true
    
 
     return container;
+}
+
+const formElOnChange = (dataObj:any, key:string, value: any) => {
+    dataObj[key] = value;
+    console.log(dataObj);
 }
