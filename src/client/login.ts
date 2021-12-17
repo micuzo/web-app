@@ -12,17 +12,21 @@ const togglePageState = () => {
 
 const confirmAction = () => {
     if (isLogin) {
-        //redirect to dashboard with user
-        
+        store.initCart();
+        store.setUser();
     }
     else {
-        //Register user to the database
+        store.initCart();
+        store.setUser();
     }
 
     window.location.href = "/home";
 }
 
 window.onload = () => {
+    if (store.getUser()){
+        window.location.href = "/home";
+    }
     //Check for a current user if yes?
     //redirect dashboard
 }

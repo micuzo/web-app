@@ -5,7 +5,6 @@ const dummy = {
     Publisher: "Scholastic Press",
     NumPages: 374
 }
-
 const bookListItems = [];
 
 const search = (event) => {
@@ -72,7 +71,9 @@ const createBookListItemSm = (book:any) => {
         bookListItems.splice(bookListItems.indexOf(containerSm), 1, createBookListItemLg(book));
         renderList();
     });
-    const addToCartButton = createButton(ButtonType.PRIMARY, rightCol, "Add to cart", () => null);
+    const addToCartButton = createButton(ButtonType.PRIMARY, rightCol, "Add to cart", () => {
+        store.addToCart(book);
+    });
     
     return containerSm;
 }
@@ -169,7 +170,9 @@ const createBookListItemLg = (book:any) => {
         })
     })
 
-    const addToCartButton = createButton(ButtonType.PRIMARY, middeCol, "Add to cart", () => null);
+    const addToCartButton = createButton(ButtonType.PRIMARY, middeCol, "Add to cart", () => {
+        store.addToCart(book);
+    });
 
     const rightCol = basicElement({
         type: "div",
