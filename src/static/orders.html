@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/index.css">
+    <link rel="stylesheet" href="static/orders.css">
     <link rel="stylesheet" href="static/cart.css">
     <title>Bookstore</title>
 </head>
@@ -15,15 +16,19 @@
         </a>
         <div id="navRight">
             <a href="cart">Cart</a>
-            <a href="orders">Orders</a>
+            <a >Orders</a>
             <button onclick="logout()">Logout</a>
         </div>
     </nav>
-    <h2>Here are the items in your Cart:</h2>
-    <div id="cartItems"></div>
+    <div id="search">
+        <h2>Type in your order number</h2>
+        <input type="number"/>
+        <button class="btn btn-primary" onclick="displayOrder()">Find</button>
+    </div>
+    <div id="order"></div>
 </body>
 <script src="static/js/store.js"></script>
 <script src="static/js/helper.js"></script>
 <script src="static/js/commonUI.js"></script>
-<script src="static/js/cart.js"></script>
+<script src="static/js/orders.js"></script>
 </html>

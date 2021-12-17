@@ -20,6 +20,10 @@ app.get('/cart', (req, res) => {
     res.sendFile("src/static/cart.html", {root: process.cwd()});
 });
 
+app.get('/orders', (req, res) => {
+    res.sendFile("src/static/orders.html", {root: process.cwd()});
+})
+
 
 app.listen(port, () => {
     console.log("Now listening on port 3000");

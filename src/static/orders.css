@@ -1,0 +1,27 @@
+#order{
+    width: 50%;
+    margin: 50px auto;
+}
+
+#search{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 250px;
+    justify-content: space-between;
+}
+
+#search h2{
+    margin-bottom: 0px;
+}
+
+#location-container{
+    margin-bottom: 30px;
+}
+
+#order span{
+    font-family: Ruda;
+    color: #424136;
+}
