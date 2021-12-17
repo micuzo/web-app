@@ -11,17 +11,16 @@ const bookListItems = [];
 const search = (event) => {
     const searchText = (document.querySelector("#searchInput") as HTMLInputElement).value;
     //document.querySelector("#bookList").innerHTML = "";
-    bookListItems.push(createBookListItemSm());
+    //bookListItems.push(createBookListItemSm({ISBN: counter++}));
     console.log(searchText);
 }
 
-const createBookListItemSm = () => {
-    const root = document.querySelector("#bookList");
+const createBookListItemSm = (book:any) => {
 
     const containerSm = basicElement({
         type: "div",
-        parent: root,
-        className: "book-li book-li-sm"
+        parent: null,
+        className: "book-li book-li-sm",
     });
     
     //Tile, book image, price, author
@@ -69,21 +68,20 @@ const createBookListItemSm = () => {
         parent: containerSm,
         className: "li-right-col"
     });
-    const moreInfoButton = createButton(ButtonType.SECONDARY, rightCol, "More Info");
-    const addToCartButton = createButton(ButtonType.PRIMARY, rightCol, "Add to cart");
+    const moreInfoButton = createButton(ButtonType.SECONDARY, rightCol, "More Info", () => {
+        bookListItems.splice(bookListItems.indexOf(containerSm), 1, createBookListItemLg(book));
+        renderList();
+    });
+    const addToCartButton = createButton(ButtonType.PRIMARY, rightCol, "Add to cart", () => null);
     
-
-    //Append info table
-    root.appendChild(containerSm);
-
     return containerSm;
 }
 
-const createListItemLg = () => {
-    const root = document.querySelector("#bookList");
+const createBookListItemLg = (book:any) => {
+   
     const container = basicElement({
         type: "div",
-        parent: root,
+        parent: null,
         className: "book-li book-li-lg"
     });
 
@@ -132,7 +130,6 @@ const createListItemLg = () => {
         innerHTML: "$22"
     });
 
-
     //More Info Column
     const middeCol = basicElement({
         type: "p",
@@ -172,7 +169,7 @@ const createListItemLg = () => {
         })
     })
 
-    const addToCartButton = createButton(ButtonType.PRIMARY, middeCol, "Add to cart");
+    const addToCartButton = createButton(ButtonType.PRIMARY, middeCol, "Add to cart", () => null);
 
     const rightCol = basicElement({
         type: "div",
@@ -184,17 +181,34 @@ const createListItemLg = () => {
         type: "button",
         parent: rightCol,
         innerHTML: "^",
-        className: "btn-collapse"
+        className: "btn-collapse",
+        onclick: () => {
+            bookListItems.splice(bookListItems.indexOf(container), 1, createBookListItemSm(book));
+            renderList();
+        }
     });
+
+    return container;
     
+}
+
+const renderList = () => {
+    const root = document.querySelector("#bookList");
+    root.innerHTML = "";
+    bookListItems.forEach((li) => {
+        root.appendChild(li);
+    });
 }
 
 window.onload = () => {
     //fetch from db
     //createBookListItemSm();
     const root = document.querySelector("#bookList");
-    createListItemLg();
-    createBookListItemSm();
+    for (let i = 0; i < 10; i++){
+        const li = createBookListItemSm({ISBN: i});
+        bookListItems.push(li);
+    }
+    renderList();
     return;
     root.appendChild(basicElement({
         type: "img",

@@ -146,10 +146,10 @@
 .price{
     font-family: Ruda;
     font-style: normal;
-    font-weight: bold;
+    font-weight: normal;
     font-size: 48px;
     line-height: 61px;
-    color: #000000;
+    color: #838383;
 }
 
 .li-img-sm{

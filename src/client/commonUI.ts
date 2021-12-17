@@ -4,7 +4,8 @@ interface BasicElConfig {
     className?: string,
     id?: string,
     innerHTML?: string,
-    src?: string
+    src?: string,
+    onclick?: Function
 }
 
 enum ButtonType {
@@ -19,16 +20,17 @@ const basicElement = (config: BasicElConfig) => {
         el[key] = config[key];
     });
     
-    config.parent.appendChild(el);
+    if(config.parent) config.parent.appendChild(el);
     return el;
 }
 
-const createButton = (btnType: ButtonType, parent: any, innerHTML: string) => {
+const createButton = (btnType: ButtonType, parent: any, innerHTML: string, onClick: Function) => {
     const className = btnType === ButtonType.PRIMARY ? "btn btn-primary" : "btn btn-secondary";
     return basicElement({
         type: "button",
         parent: parent,
         innerHTML: innerHTML,
-        className: className
+        className: className,
+        onclick: onClick
     });
 }
