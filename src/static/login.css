@@ -5,13 +5,13 @@
     justify-content: center;
     align-items: center;
     width: 493px;
-    height: 481px;
     background: #FEF2D3;
     border: 4px solid #323232;
     box-sizing: border-box;
     box-shadow: 9px 8px 0px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     margin-bottom: 30px;
+    padding-bottom: 30px;
 }
 
 #loginBox h3{
@@ -33,15 +33,16 @@ body{
     align-items: center;
 }
 
+#loginBox .inputContainer{
+    margin-bottom: 10px;
+}
+
 #loginBox input{
-    position: static;
-    width: 350px;
+    font-size: 18px;
+    width: 100%;
     height: 32px;
-    color: white;
-    background: #424136;
+    margin-left: 0px;
     border-radius: 10px;
-    margin: 5px 0px;
-    padding: 5px;
 }
 
 #confirmButton{

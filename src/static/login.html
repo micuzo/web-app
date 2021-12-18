@@ -12,18 +12,14 @@
     <h1>Bookstore</h1>
     <div id="loginBox">
         <h3 id="loginBoxTitle">Login</h3>
-        <div class="inputContainer">
-            <label for="email">email</label>
-            <input type="email" name="email"/>
-        </div>
-        <div class="inputContainer">
-            <label for="password">password</label>
-            <input type="password"/>
+        <div id="og-form"></div>
+        <div id="register-form">
         </div>
     </div>
-    <button id="confirmButton" onclick="confirmAction()">Login</button>
+    <button class="btn btn-primary" onclick="confirmAction()">Continue</button>
     <button id="toggleButton" onclick="togglePageState()">Register</button>
 </body>
+<script src="static/js/commonUI.js"></script>
 <script src="static/js/store.js"></script>
 <script src="static/js/login.js"></script>
 </html>

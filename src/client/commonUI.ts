@@ -6,6 +6,7 @@ interface BasicElConfig {
     innerHTML?: string,
     src?: string,
     for?: string,
+    inputType?: string,
     onclick?: Function,
     onchange?: Function
 }
@@ -20,6 +21,10 @@ const basicElement = (config: BasicElConfig) => {
     const el = document.createElement(config.type);
     Object.keys(config).forEach((key) => {
         if (key === "type") return;
+        if (key === "inputType"){
+            el["type"] = config.inputType;
+            return;
+        }
         el[key] = config[key];
     });
     
@@ -40,6 +45,30 @@ const createButton = (btnType: ButtonType, parent: any, innerHTML: string, onCli
         innerHTML: innerHTML,
         className: className,
         onclick: onClick
+    });
+}
+
+const createFormInputs = (labelTypeMap: any, parent: any, dataObj: any) => {
+    Object.keys(labelTypeMap).forEach((label) => {
+        const container = basicElement({
+            type: "div",
+            parent: parent,
+            className: "inputContainer"
+        });
+
+        const labelUI = basicElement({
+            type: "label",
+            parent: container,
+            innerHTML: label
+        });
+
+        const input = basicElement({
+            type: "input",
+            parent: container,
+            id: label,
+            onchange: (e) => formElOnChange(dataObj, label, e.target.value),
+            inputType: labelTypeMap[label]
+        });
     });
 }
 
@@ -100,5 +129,4 @@ const createCartItem = (book:Book, count:number, hasRemoveButton: boolean = true
 
 const formElOnChange = (dataObj:any, key:string, value: any) => {
     dataObj[key] = value;
-    console.log(dataObj);
 }

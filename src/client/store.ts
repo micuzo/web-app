@@ -1,6 +1,5 @@
 const dummyUser = {
-    username: "bob@example.com",
-    password: "123",
+    email: "bob@example.com",
     name: "bob smith",
     address: "321 street nyc"
 
@@ -12,7 +11,7 @@ const getItem = (item) => JSON.parse(storage.getItem(item));
 const setItem = (key, val) => storage.setItem(key, JSON.stringify(val));
 
 const getUser = () => JSON.parse(storage.getItem("user"));
-const setUser = (user?) => storage.setItem("user", user ? JSON.stringify(user) : JSON.stringify(dummyUser));
+const setUser = (user?:User) => storage.setItem("user", user ? JSON.stringify(user) : JSON.stringify(dummyUser));
 
 const initCart = () => setItem("cart", []);
 const getCart = () => getItem("cart");

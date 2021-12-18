@@ -8,6 +8,13 @@ interface Book{
     price: number
 }
 
+interface User{
+    email: string,
+    password?: string,
+    name: string,
+    address: string
+}
+
 const dummyBooks: Book[] = [
     {
         ISBN: 0,
