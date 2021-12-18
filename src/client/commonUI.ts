@@ -6,7 +6,8 @@ interface BasicElConfig {
     innerHTML?: string,
     src?: string,
     for?: string,
-    onclick?: Function
+    onclick?: Function,
+    onchange?: Function
 }
 
 enum ButtonType {

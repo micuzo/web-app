@@ -55,11 +55,12 @@ const checkoutForm = (title) => {
         const input = basicElement({
             type: "input",
             parent: container,
-            id: label
+            id: label,
+            onchange: (e) => formElOnChange(form, label, e.target.value)
         });
     });
 
-    const submit = createButton(ButtonType.PRIMARY, root, "Confirm Order", () => alert("order confirmed"));
+    const submit = createButton(ButtonType.PRIMARY, root, "Confirm Order", () => console.log(form));
 }
 
 
