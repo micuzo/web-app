@@ -29,3 +29,6 @@ select max(order_number) from book_order;
 insert into book_order
 values (<next_order_number>, <user_email>, <ISBN>, <order_location>, current_date, <shipping_address>, <billing_address>, <quantity>, <total>);
 
+
+--Accounts
+

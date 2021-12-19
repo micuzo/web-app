@@ -69,17 +69,24 @@ router.post('/order', (req, res) => {
         Object.keys(payload.bookCount).forEach(key => {
             client.query("insert into book_order values($1, $2, $3, 'warehouse', current_date, $4, $5, $6, $7)", 
                 [
-                    nextOrdedNo, payload.email, key, payload.shipping_address, payload.billing_address, payload.bookCount[key], 55
+                    nextOrdedNo, payload.email, key, payload.shipping_address, payload.billing_address, payload.bookCount[key], -1 //total not implemented yet
                 ], (insertErr, insertData) => {
                     if(insertErr) res.send("Error: " + insertErr);
                     updateCounter++;
                     if (updateCounter >= Object.keys(payload.bookCount).length){
-                        res.json({res: "Order completed"});
+                        res.json({res: "Order completed with order number: " + nextOrdedNo});
                     }
                 });
         });
     });
 });
+
+router.post('/login', (req, res) => {
+    client.query("select account_password from account where email = $1", [req.body.email], (err, data) => {
+        if (req.body.password === data.rows[0].account_password) res.json({res: "ok"});
+        else res.json({res: "no"});
+    });
+})
 
 
 

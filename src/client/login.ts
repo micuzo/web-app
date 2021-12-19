@@ -45,21 +45,15 @@ const confirmAction = () => {
         })
     });
     store.initCart();
-    window.location.href = formLogin.email === "admin" ? "/home-admin" : "/home";
-    return;
 
     if (isLogin) {
         //get user
-        store.setUser({
-            email: formLogin.email,
-            name: formLogin.name,
-            address: JSON.stringify({
-                city: formLogin.city,
-                country: formLogin.country,
-                ["postal code"]: formLogin["postal code"]
-            })
+        post("/api/login", {email: formLogin.email, password: formLogin.password})
+        .then(res => res.json())
+        .then(res => {
+            if (res.res === "ok") window.location.href = "/home";
+            else alert("incorrect username / password");
         });
-        store.initCart();
     }
     else {
         //add user to db
