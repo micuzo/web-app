@@ -18,7 +18,7 @@ const renderOrder = (order_location) => {
     const location = basicElement({
         type: "span",
         parent: locationContainer,
-        innerHTML: order_location.order_location
+        innerHTML: order_location
     });
 
     orderItemsUI.forEach((li) => {
