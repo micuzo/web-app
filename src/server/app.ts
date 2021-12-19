@@ -1,5 +1,5 @@
 import * as express from "express";
-import * as path from "path";
+import router from "./api";
 
 const app = express();
 const port = 3000;
@@ -34,7 +34,10 @@ app.get('/cart', (req, res) => {
 
 app.get('/orders', (req, res) => {
     res.sendFile("src/static/orders.html", {root: process.cwd()});
-})
+});
+
+
+app.use('/api', router);
 
 
 app.listen(port, () => {
