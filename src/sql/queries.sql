@@ -14,6 +14,9 @@ select isbn, publisher_name, title, author, genre, pages, price, quantity
 from book natural join publisher
 where isbn = <search>;
 
+--Get isbn and price for a given list of books, used during order creation to computer total
+select isbn, price from book
+where isbn in (<val1>, <val2>, etc...);
 
 --Orders
 
@@ -30,5 +33,5 @@ insert into book_order
 values (<next_order_number>, <user_email>, <ISBN>, <order_location>, current_date, <shipping_address>, <billing_address>, <quantity>, <total>);
 
 
---Accounts
-
+--Accounts get password for email
+select account_password from account where email = <email>

@@ -55,29 +55,46 @@ router.get('/order/:id', (req, res, next) => {
         });
 });
 
+const calculateOrderPrice = (ISBNBookMap) => {
+    client.query("selec")
+}
+
 router.post('/order', (req, res) => {
+    //Get next order_number
     client.query("select max(order_number) from book_order", (err, data) => {
         if (err) res.send("Error: " + err);
         const nextOrdedNo = data.rows[0].max + 1;
-        // email: user.email,
-        // bookCount: countByISBN,
-        // shipping_address: JSON.stringify(shippingForm),
-        // billing_address: JSON.stringify(billingForm)
-        //(<next_order_number>, <user_email>, <ISBN>, <order_location>, issue_date, <shipping_address>, <billing_address>, <quantity>, <total>);
+        
+        //Get price map to compute total
         const payload = req.body;
         let updateCounter = 0;
-        Object.keys(payload.bookCount).forEach(key => {
-            client.query("insert into book_order values($1, $2, $3, 'warehouse', current_date, $4, $5, $6, $7)", 
-                [
-                    nextOrdedNo, payload.email, key, payload.shipping_address, payload.billing_address, payload.bookCount[key], -1 //total not implemented yet
-                ], (insertErr, insertData) => {
-                    if(insertErr) res.send("Error: " + insertErr);
-                    updateCounter++;
-                    if (updateCounter >= Object.keys(payload.bookCount).length){
-                        res.json({res: "Order completed with order number: " + nextOrdedNo});
-                    }
+        let inClause = "in (";
+        Object.keys(payload.bookCount).forEach((isbn: string, index) => {
+            const last = index >= Object.keys(payload.bookCount).length - 1;
+            inClause += !last ? `$${index + 1}, ` : `$${index + 1})`;
+        })
+        
+        client.query("select isbn, price from book "
+            + "where isbn " + inClause,
+            Object.keys(payload.bookCount),
+            (bookMapErr, bookMapData) => {
+                if (bookMapErr) res.send("Error: " + bookMapErr);
+                const total = bookMapData.rows.reduce((prev, curr, index) => prev + curr.price * payload.bookCount[curr.isbn],0);
+
+                //Insert order in order relation
+                Object.keys(payload.bookCount).forEach(key => {
+                    client.query("insert into book_order values($1, $2, $3, 'warehouse', current_date, $4, $5, $6, $7)", 
+                            [ nextOrdedNo, payload.email, key, payload.shipping_address, payload.billing_address, payload.bookCount[key], total ], 
+                            (insertErr, insertData) => {
+                            if(insertErr) res.send("Error: " + insertErr);
+                            updateCounter++;
+                            if (updateCounter >= Object.keys(payload.bookCount).length){
+                                res.json({res: "Order completed with order number: " + nextOrdedNo});
+                            }
+                        });
                 });
-        });
+            }
+        )
     });
 });
 

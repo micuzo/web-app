@@ -85,7 +85,11 @@ const checkoutForm = (title) => {
         }
         post("/api/order", payload)
         .then((res) => res.json())
-        .then(res => alert(res.res));
+        .then(res => {
+            alert(res.res);
+            initCart();
+            location.reload();
+        });
     });
 }
 
