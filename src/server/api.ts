@@ -55,10 +55,6 @@ router.get('/order/:id', (req, res, next) => {
         });
 });
 
-const calculateOrderPrice = (ISBNBookMap) => {
-    client.query("selec")
-}
-
 router.post('/order', (req, res) => {
     //Get next order_number
     client.query("select max(order_number) from book_order", (err, data) => {
@@ -99,12 +95,37 @@ router.post('/order', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
+    if (!req.body.email || !req.body.password) res.status(404).send({error: "User not found"});
     client.query("select account_password from account where email = $1", [req.body.email], (err, data) => {
-        if (req.body.password === data.rows[0].account_password) res.json({res: "ok"});
+        if (data.rows.length && req.body.password === data.rows[0].account_password) res.json({res: "ok"});
         else res.json({res: "no"});
     });
+});
+
+
+router.get('/report/per-author', (req, res, next) => {    
+    res.locals.query = `select author, sum(book.price * book_order.quantity) as sales
+    from book, book_order
+    where book.isbn = book_order.isbn
+    group by author`;
+    next();
+});
+
+
+router.get('/report/per-genre', (req, res, next) => {
+    res.locals.query = `select genre, sum(book.price * book_order.quantity) as sales
+    from book, book_order
+    where book.isbn = book_order.isbn
+    group by genre`;
+    next();
+});
+
+router.get('/report/*', (req, res, next) => {
+    const query = res.locals.query;
+    client.query(query, (err, data) => {
+        if (err) res.status(404).send("Error: " + err);
+        res.json(data.rows);
+    })
 })
-
-
 
 export default router;

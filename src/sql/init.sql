@@ -1,4 +1,4 @@
-\c michaeluzoegwu
+\c postgres
 drop database if exists bookstore_101128175;
 create database bookstore_101128175;
 \c bookstore_101128175;
@@ -13,6 +13,7 @@ create table account (
 
 insert into account
 values
+    ('admin@example.com', 'admin', 'Admin Admin', 'Admin Avenue'),
     ('bob@example.com', '12345', 'Bob Smith', '123 main street'),
     ('alice@example.com', 'stevejobs', 'Alice Smith', '123 main street');
 
@@ -51,7 +52,10 @@ values
     (1278, 'pagez@example.com', 'Star Wars', 'George Lucas', 'Sci-fi', 872, 33, 0, 66),
     (8912, 'awesome-books@example.com', 'And then there were none', 'Agatha Christie', 'Mystery', 502, 89, 12, 7),
     (8740, 'omt@example.com', 'A brief history of time', 'Stephen Hawking', 'Educational', 489, 103, 8, 99),
-    (2007, 'omt@example.com', 'The Martian', 'Andy Weir', 'Sci-fi', 459, 15, 45, 300);
+    (2007, 'omt@example.com', 'The Martian', 'Andy Weir', 'Sci-fi', 459, 15, 45, 300),
+    (2020, 'pagez@example.com', 'Murder on the Orient Express', 'Agatha Christie', 'Mystery', 500, 43, 9, 22),
+    (1333, 'omt@example.com', 'The Hunger Games: Catching Fire', 'Suzanne Collins', 'Dystopian', 302, 25, 35, 98),
+    (2097, 'tss@example.com', 'Relational Databases', 'Sea Quill', 'Educational', 1398, 700, 0, 287);
 
 --Order
 create table book_order (
@@ -70,4 +74,8 @@ insert into book_order
 values
     (1, 'bob@example.com', 3394, 'Austin, TX', '2021-10-31', '123 main street', '123 main street', 2, 59),
     (1, 'bob@example.com', 2007, 'Austin, TX', '2021-10-31', '123 main street', '123 main street', 1, 59),
-    (2, 'alice@example.com', 8740, 'Paris, FR', '2020-04-01', '123 main street', '123 main street', 1, 103);
+    (2, 'alice@example.com', 8740, 'Paris, FR', '2020-04-01', '123 main street', '123 main street', 1, 103),
+    (3, 'bob@example.com', 2097, 'Out for Delivery', '2021-12-17', '123 main street', '123 main street', 3, 798),
+    (3, 'bob@example.com', 1333, 'Shanghai, CN', '2021-12-13', '123 main street', '123 main street', 1, 798),
+    (4, 'alice@example.com', 1278, 'Cairo, EG', '2021-12-01', '123 main street', '123 main street', 1, 109),
+    (4, 'alice@example.com', 2020, 'Out for Delivery', '2021-12-19', '123 main street', '123 main street', 1, 109);

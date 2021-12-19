@@ -51,7 +51,7 @@ const confirmAction = () => {
         post("/api/login", {email: formLogin.email, password: formLogin.password})
         .then(res => res.json())
         .then(res => {
-            if (res.res === "ok") window.location.href = "/home";
+            if (res.res === "ok") window.location.href = formLogin.email === "admin@example.com" ? "/home-admin" : "/home";
             else alert("incorrect username / password");
         });
     }

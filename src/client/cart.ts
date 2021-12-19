@@ -88,7 +88,7 @@ const checkoutForm = (title) => {
         .then(res => {
             alert(res.res);
             initCart();
-            location.reload();
+            location.reload();  
         });
     });
 }

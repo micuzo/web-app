@@ -35,3 +35,15 @@ values (<next_order_number>, <user_email>, <ISBN>, <order_location>, current_dat
 
 --Accounts get password for email
 select account_password from account where email = <email>
+
+
+--Report get sales paer author and genre
+select genre, sum(book.price * book_order.quantity) as sales
+from book, book_order
+where book.isbn = book_order.isbn
+group by genre;
+
+select author, sum(book.price * book_order.quantity) as sales
+from book, book_order
+where book.isbn = book_order.isbn
+group by author;
