@@ -45,7 +45,7 @@ router.get('/book*', (req,res) => {
 });
 
 router.get('/order/:id', (req, res, next) => {
-    client.query("select title, author, book_order.quantity, order_location " 
+    client.query("select title, author, book_order.quantity, order_location, price, total " 
         + "from book_order, book " 
         + "where book.isbn = book_order.isbn and order_number = $1", 
         [req.params.id], 
@@ -53,6 +53,32 @@ router.get('/order/:id', (req, res, next) => {
             if (err) res.status(404).send("Error: " + err);
             res.json(data.rows);
         });
+});
+
+router.post('/order', (req, res) => {
+    client.query("select max(order_number) from book_order", (err, data) => {
+        if (err) res.send("Error: " + err);
+        const nextOrdedNo = data.rows[0].max + 1;
+        // email: user.email,
+        // bookCount: countByISBN,
+        // shipping_address: JSON.stringify(shippingForm),
+        // billing_address: JSON.stringify(billingForm)
+        //(<next_order_number>, <user_email>, <ISBN>, <order_location>, issue_date, <shipping_address>, <billing_address>, <quantity>, <total>);
+        const payload = req.body;
+        let updateCounter = 0;
+        Object.keys(payload.bookCount).forEach(key => {
+            client.query("insert into book_order values($1, $2, $3, 'warehouse', current_date, $4, $5, $6, $7)", 
+                [
+                    nextOrdedNo, payload.email, key, payload.shipping_address, payload.billing_address, payload.bookCount[key], 55
+                ], (insertErr, insertData) => {
+                    if(insertErr) res.send("Error: " + insertErr);
+                    updateCounter++;
+                    if (updateCounter >= Object.keys(payload.bookCount).length){
+                        res.json({res: "Order completed"});
+                    }
+                });
+        });
+    });
 });
 
 

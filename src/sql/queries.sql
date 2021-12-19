@@ -18,7 +18,14 @@ where isbn = <search>;
 --Orders
 
 --Get order by order number - include name, author of books and quantity in order
-select title, author, book_order.quantity
+select title, author, book_order.quantity, price, total
 from book_order, book 
 where book.isbn = book_order.isbn and order_number = <order_number>;
+
+--Get max book order - used to increment order number
+select max(order_number) from book_order;
+
+--Add new order
+insert into book_order
+values (<next_order_number>, <user_email>, <ISBN>, <order_location>, current_date, <shipping_address>, <billing_address>, <quantity>, <total>);
 

@@ -99,12 +99,20 @@ const createCartItem = (book:Book, count:number, hasRemoveButton: boolean = true
         innerHTML: book.author
     });
 
+    const price = basicElement({
+        type: "p",
+        parent: container,
+        innerHTML: `$${book.price}`,
+        className: "price"
+    })
+
     const quantity = basicElement({
         type: "p",
         parent: container,
         innerHTML: `x${count.toString()}`,
         className: "quantity"
     });
+
 
     if (hasRemoveButton){
         const removeButton = createButton(ButtonType.SECONDARY_SM, container, "Remove", () => {

@@ -1,9 +1,11 @@
 import * as express from "express";
+import * as bodyParser from "body-parser";
 import router from "./api";
 
 const app = express();
 const port = 3000;
 
+const jsonParser = bodyParser.json();
 
 app.use("/static", express.static("src/static"));
 app.use("/static/js", express.static("js/client"));
@@ -37,7 +39,7 @@ app.get('/orders', (req, res) => {
 });
 
 
-app.use('/api', router);
+app.use('/api', jsonParser, router);
 
 
 app.listen(port, () => {

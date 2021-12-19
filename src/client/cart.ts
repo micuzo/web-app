@@ -34,6 +34,7 @@ const createContinueButton = () => {
 const renderCartList = () => {
     const root = document.querySelector("#cartItems");
     root.innerHTML = "";
+
     cartItemsUI.forEach((li) => {
         root.appendChild(li);
     });
@@ -73,7 +74,18 @@ const checkoutForm = (title) => {
     createFormInputs(labelTypeMap, root, billingForm);
 
     const submit = createButton(ButtonType.PRIMARY, root, "Confirm Order", () => {
-        alert("Order Submitted");
+        const user = getUser();
+        const cart = getCart();
+        const bookByISBN = [];
+        const payload = {
+            email: user.email,
+            bookCount: countByISBN,
+            shipping_address: JSON.stringify(shippingForm),
+            billing_address: JSON.stringify(billingForm)
+        }
+        post("/api/order", payload)
+        .then((res) => res.json())
+        .then(res => alert(res.res));
     });
 }
 
@@ -87,5 +99,12 @@ window.onload = () => {
     });
     
     cartItemsUI = Object.keys(countByISBN).map((ISBN: any) => createCartItem(ISBNBookMap[ISBN], countByISBN[ISBN]))
+
+    basicElement({
+        type: "h2",
+        parent: document.querySelector("#total"),
+        innerHTML:`Total:  $${(cart as any[]).reduce((prev, curr, index) => prev + curr.price, 0)}`
+    });
+
     renderCartList();
 }

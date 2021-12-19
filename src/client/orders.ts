@@ -4,6 +4,7 @@ const ISBNBookMapOrder = {};
 
 const renderOrder = (order_location) => {
     const root = document.querySelector("#order");
+    
     const locationContainer = basicElement({
         type: "span",
         parent: root,
@@ -36,6 +37,11 @@ const displayOrder = () => {
             alert("No order was found with that order number");
             return;
         }
+        basicElement({
+            type: "h2",
+            parent: document.querySelector("#order"),
+            innerHTML:`Total:  $${data[0].total}`
+        });
         orderItemsUI = data.map(order => createCartItem(order, order.quantity, false));
         renderOrder(data[0].order_location);
     });

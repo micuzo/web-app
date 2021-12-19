@@ -155,3 +155,8 @@ label{
     margin: 0px 20px;
     color: #424136;
 }
+
+.cart-item .price{
+    margin-left: 30px;
+    color: rgb(71, 71, 71);
+}
