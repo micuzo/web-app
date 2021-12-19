@@ -2,13 +2,22 @@ let cartItemsUI = [];
 const countByISBN = {};
 const ISBNBookMap = {};
 let continueButton;
-const form = {
+const billingForm = {
     Name: "",
     City: "",
     Country: "",
     Email: "",
     ["Postal Code"]: ""
 }
+
+const shippingForm = {
+    Name: "",
+    City: "",
+    Country: "",
+    Email: "",
+    ["Postal Code"]: ""
+};
+
 
 const createContinueButton = () => {
     const root = document.querySelector("#cartItems");
@@ -39,28 +48,33 @@ const checkoutForm = (title) => {
         continueButton = null;
     }
 
-    ["Name", "City", "Country", "Email", "Postal Code"].forEach((label) => {
-        const container = basicElement({
-            type: "div",
-            parent: root,
-            className: "inputContainer"
-        });
+    const labelTypeMap = {
+        Name: "string",
+        City: "string",
+        Country: "string",
+        Email: "email",
+        ["Postal Code"]: "string"
+    }
 
-        const labelUI = basicElement({
-            type: "label",
-            parent: container,
-            innerHTML: label
-        });
-
-        const input = basicElement({
-            type: "input",
-            parent: container,
-            id: label,
-            onchange: (e) => formElOnChange(form, label, e.target.value)
-        });
+    basicElement({
+        type: "h2",
+        parent: root,
+        innerHTML: "Shipping information"
     });
 
-    const submit = createButton(ButtonType.PRIMARY, root, "Confirm Order", () => console.log(form));
+    createFormInputs(labelTypeMap, root, shippingForm);
+
+    basicElement({
+        type: "h2",
+        parent: root,
+        innerHTML: "Billing information"
+    });
+
+    createFormInputs(labelTypeMap, root, billingForm);
+
+    const submit = createButton(ButtonType.PRIMARY, root, "Confirm Order", () => {
+        alert("Order Submitted");
+    });
 }
 
 
