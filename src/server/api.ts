@@ -10,10 +10,11 @@ client.connect();
 
 
 
-router.get('/book', (req, res) => {
-    client.query('select * from book', (err, data) => {
-        if (err) res.status(404).send("Error: " + err);
-        res.json(data.rows);
+router.get('/book', (req, res, next) => {
+    client.query('select isbn, publisher_name, title, author, genre, pages, price, quantity from book natural join publisher', (err, data) => {
+        res.locals.err = err;
+        res.locals.data = data.rows;
+        next();
     });
 });
 
