@@ -1,4 +1,4 @@
-\c postgres
+--\c postgres
 drop database if exists bookstore_101128175;
 create database bookstore_101128175;
 \c bookstore_101128175;
