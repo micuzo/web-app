@@ -63,6 +63,12 @@ const dummyBooks: Book[] = [
     }
 ]
 
+const getBookTable = () => {
+    const headers = Object.keys(dummyBooks[0]);
+    const data = dummyBooks.map((book) => Object.values(book));
+    return [headers, ...data];
+}
+
 const logout = () => {
     if (!confirm("Are you sure you want to log out?") || !store.getUser()) return;
     store.clear();

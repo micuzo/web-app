@@ -45,7 +45,7 @@ const confirmAction = () => {
         })
     });
     store.initCart();
-    window.location.href = "/home";
+    window.location.href = formLogin.email === "admin" ? "/home-admin" : "/home";
     return;
 
     if (isLogin) {

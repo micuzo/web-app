@@ -16,6 +16,18 @@ app.get('/home', (req, res) => {
     res.sendFile("src/static/home.html", {root: process.cwd()});
 });
 
+app.get('/home-admin', (req, res) => {
+    res.sendFile("src/static/home-admin.html", {root: process.cwd()});
+})
+
+app.get('/catalog', (req, res) => {
+    res.sendFile("src/static/catalog.html", {root: process.cwd()});
+})
+
+app.get('/reports', (req, res) => {
+    res.sendFile("src/static/reports.html", {root: process.cwd()});
+})
+
 app.get('/cart', (req, res) => {
     res.sendFile("src/static/cart.html", {root: process.cwd()});
 });

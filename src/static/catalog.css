@@ -1,0 +1,20 @@
+#edit-catalog{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+    margin-left: 30px;
+}
+
+#edit-catalog-inputs{
+    display: flex;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+}
+
+#edit-catalog-inputs input{
+    width: 200px;
+    height: 32px;
+    font-size: 14px;
+    border-radius: 10px;
+}

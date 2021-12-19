@@ -127,6 +127,33 @@ const createCartItem = (book:Book, count:number, hasRemoveButton: boolean = true
     return container;
 }
 
+const createTable = (data: any[], parent, isDouble?) => {
+    const table = basicElement({
+        type: "table",
+        parent
+    });
+    
+    data.forEach((row: any[], index) => {
+        const rowUI = basicElement({
+            type: "tr",
+            parent: table
+        });
+        if (isDouble && index === 0) {
+            const empty = basicElement({
+                type: "th",
+                parent: rowUI
+            })
+        }
+        row.forEach((cell, cellIndex) => {
+            const cellUI = basicElement({
+                type: index === 0 || (cellIndex === 0 && isDouble) ? "th" : "td",
+                parent: rowUI,
+                innerHTML: cell
+            });
+        })
+    })
+}
+
 const formElOnChange = (dataObj:any, key:string, value: any) => {
     dataObj[key] = value;
 }

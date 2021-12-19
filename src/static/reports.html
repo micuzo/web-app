@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/index.css">
+    <link rel="stylesheet" href="static/catalog.css">
+    <title>Bookstore</title>
+</head>
+<body>
+    <nav id="navbar">
+        <a href="/home-admin">
+            <h1>Admin</h1>
+        </a>
+        <div id="navRight">
+            <a href="catalog">Catalog</a>
+            <a href="reports">Reports</a>
+            <button onclick="logout()">Logout</a>
+        </div>
+    </nav>
+    <h2>Report</h2>
+    <div style="width: 100%; display: flex; justify-content: center; flex-direction: column;" id="container">
+        <h2> Per Author </h2>
+        <div id="author-report"></div>
+        <h2> Per Genre</h2>
+        <div id="genre-report"></div>
+    </div>
+</body>
+<script src="static/js/store.js"></script>
+<script src="static/js/helper.js"></script>
+<script src="static/js/commonUI.js"></script>
+<script src="static/js/report.js"></script>
+</html>
