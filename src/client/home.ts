@@ -1,10 +1,14 @@
-const bookListItems = [];
+let bookListItems = [];
 
 const search = (event) => {
     const searchText = (document.querySelector("#searchInput") as HTMLInputElement).value;
-    //document.querySelector("#bookList").innerHTML = "";
-    //bookListItems.push(createBookListItemSm({ISBN: counter++}));
-    console.log(searchText);
+    fetch("/api/book/" + searchText)
+    .then((res) => res.json())
+    .then((data) => {
+        const root = document.querySelector("#bookList");
+        bookListItems = data.map(book => createBookListItemSm(book));
+        renderList();
+    });
 }
 
 const createBookListItemSm = (book:Book) => {
@@ -39,7 +43,7 @@ const createBookListItemSm = (book:Book) => {
     const title = basicElement({
         type: "h3",
         parent: info,
-        innerHTML: book.name
+        innerHTML: book.title
     });
     
     const author = basicElement({
@@ -66,6 +70,7 @@ const createBookListItemSm = (book:Book) => {
     });
     const addToCartButton = createButton(ButtonType.PRIMARY, rightCol, "Add to cart", () => {
         store.addToCart(book);
+        alert(`${book.title} added to cart`);
     });
     
     return containerSm;
@@ -102,7 +107,7 @@ const createBookListItemLg = (book:Book) => {
     const title = basicElement({
         type: "h2",
         parent: info,
-        innerHTML: book.name
+        innerHTML: book.title
     });
 
     const author = basicElement({
@@ -143,7 +148,13 @@ const createBookListItemLg = (book:Book) => {
         className: "more-info-content"
     });
 
-    ["ISBN", "publisherEmail", "numberPages"].forEach((key) => {
+    const bookLabelMap = {
+        ISBN: "ISBN",
+        publisher: "Publisher",
+        pages: "Pages",
+    }
+
+    Object.keys(bookLabelMap).forEach((key) => {
         const outer = basicElement({
             type: "span",
             parent: moreInfoContent,
@@ -152,7 +163,7 @@ const createBookListItemLg = (book:Book) => {
         const label = basicElement({
             type: "span",
             parent: outer,
-            innerHTML: `${key}: `,
+            innerHTML: `${bookLabelMap[key]}: `,
             className: "bold"
         });
 
@@ -191,6 +202,7 @@ const createBookListItemLg = (book:Book) => {
 const renderList = () => {
     const root = document.querySelector("#bookList");
     root.innerHTML = "";
+    console.log(root);
     bookListItems.forEach((li) => {
         root.appendChild(li);
     });
@@ -198,11 +210,6 @@ const renderList = () => {
 
 window.onload = () => {
     const root = document.querySelector("#bookList");
-    dummyBooks.forEach(book => {
-        bookListItems.push(createBookListItemSm(book));
-    });
-    renderList();
-    return;
     root.appendChild(basicElement({
         type: "img",
         parent: root,

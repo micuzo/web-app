@@ -90,7 +90,7 @@ const createCartItem = (book:Book, count:number, hasRemoveButton: boolean = true
     const name = basicElement({
         type: "h3",
         parent: container,
-        innerHTML: book.name
+        innerHTML: book.title
     });
 
     const author = basicElement({
