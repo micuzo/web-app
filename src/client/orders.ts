@@ -2,9 +2,8 @@ let orderItemsUI = [];
 const countByISBNOrder = {};
 const ISBNBookMapOrder = {};
 
-const renderOrder = () => {
+const renderOrder = (order_location) => {
     const root = document.querySelector("#order");
-    root.innerHTML = "";
     const locationContainer = basicElement({
         type: "span",
         parent: root,
@@ -19,7 +18,7 @@ const renderOrder = () => {
     const location = basicElement({
         type: "span",
         parent: locationContainer,
-        innerHTML: "Paris France"
+        innerHTML: order_location.order_location
     });
 
     orderItemsUI.forEach((li) => {
@@ -29,13 +28,17 @@ const renderOrder = () => {
 
 
 const displayOrder = () => {
-    const cart = getCart();
-    cart.forEach((book) => {
-        if (countByISBNOrder[book.ISBN]) countByISBNOrder[book.ISBN]++;
-        else countByISBNOrder[book.ISBN] = 1;
-        ISBNBookMapOrder[book.ISBN] = book;
+    document.querySelector("#order").innerHTML = "";
+    fetch("/api/order/" + (document.querySelector("#order-input") as HTMLInputElement).value)
+    .then(res => res.json())
+    .then(data => {
+        if(data.length === 0){
+            alert("No order was found with that order number");
+            return;
+        }
+        orderItemsUI = data.map(order => createCartItem(order, order.quantity, false));
+        renderOrder(data[0].order_location);
     });
-    
-    orderItemsUI = Object.keys(countByISBNOrder).map((ISBN: any) => createCartItem(ISBNBookMapOrder[ISBN], countByISBNOrder[ISBN], false));
-    renderOrder();
+
+    return;
 }

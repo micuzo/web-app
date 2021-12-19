@@ -55,19 +55,19 @@ values
 
 --Order
 create table book_order (
-    order_number serial,
+    order_number integer,
     account_email varchar ( 50 ) references account,
     ISBN integer references book,
     order_location varchar ( 50 ) not null,
     issue_date date not null,
     shipping_address varchar not null,
     billing_address varchar not null,
+    quantity integer not null,
     total float not null
 );
 
 insert into book_order
 values
-    (default, 'bob@example.com', 3394, 'Austin, TX', '2021-10-31', '123 main street', '123 main street', 59),
-    (default, 'bob@example.com', 3394, 'Austin, TX', '2021-10-31', '123 main street', '123 main street', 59),
-    (default, 'bob@example.com', 2007, 'Austin, TX', '2021-10-31', '123 main street', '123 main street', 59),
-    (default, 'alice@example.com', 8740, 'Paris, FR', '2020-04-01', '123 main street', '123 main street', 103);
+    (1, 'bob@example.com', 3394, 'Austin, TX', '2021-10-31', '123 main street', '123 main street', 2, 59),
+    (1, 'bob@example.com', 2007, 'Austin, TX', '2021-10-31', '123 main street', '123 main street', 1, 59),
+    (2, 'alice@example.com', 8740, 'Paris, FR', '2020-04-01', '123 main street', '123 main street', 1, 103);

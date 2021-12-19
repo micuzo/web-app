@@ -21,8 +21,7 @@ router.get('/book', (req, res, next) => {
 router.get('/book/:search', (req, res, next) => {
     const where = isNaN(req.params.search) ? "where title = $1 or author = $1 or genre = $1" : "where isbn = $1";
     const text = "select isbn, publisher_name, title, author, genre, pages, price, quantity from book natural join publisher " + where;
-    const search = isNaN(req.params.search) ? req.params.search : parseInt(req.params.search);
-    const values = [search];
+    const values = [req.params.search];
     client.query(text, values, (err, data) => {
         res.locals.err = err;
         res.locals.data = data.rows;
@@ -45,24 +44,16 @@ router.get('/book*', (req,res) => {
     res.json(booksForFE);
 });
 
-
-    // ISBN: number,
-    // publisherEmail: string,
-    // title: string,
-    // author: string,
-    // genre: string,
-    // pages: number,
-    // price: number
-
-    // "isbn": 3394,
-    // "publisher_email": "tss@example.com",
-    // "title": "The Hunger Games",
-    // "author": "Suzanne Collins",
-    // "genre": "Dystopian",
-    // "pages": 374,
-    // "price": 22,
-    // "publisher_percentage": 23,
-    // "quantity": 54
+router.get('/order/:id', (req, res, next) => {
+    client.query("select title, author, book_order.quantity, order_location " 
+        + "from book_order, book " 
+        + "where book.isbn = book_order.isbn and order_number = $1", 
+        [req.params.id], 
+        (err, data) => {
+            if (err) res.status(404).send("Error: " + err);
+            res.json(data.rows);
+        });
+});
 
 
 
