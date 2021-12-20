@@ -45,7 +45,10 @@ If on **Mac OS** or linux, open the psql interactive terminal and then seed the 
 psql
 \i /your/path/to/root/web-app/src/sql/init.sql
 ```
-> On **Windows** open the "SQL Shell (psql)" application that should've come with your installation and type the above command.
+On **Windows** open the "SQL Shell (psql)" application that should've come with your installation and type the following command:
+```bash
+\i 'C:/path/to/root/web-app/src/sql/init.sql'
+```
 
 If everything went right, you should see output similar to this:
 
@@ -82,6 +85,8 @@ Edit the ```postgres.json``` file in the root directory and enter the details of
     "port": 5432
 }
 ```
+
+&nbsp;
 
 Ensure you have Node.js installed. You can install it here:
 [Install Node.js](https://nodejs.org/en/)
