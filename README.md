@@ -119,6 +119,7 @@ Now listening on port 3000
 Open a web browser and navigate to [http://localhost:300](http://localhost:300)
 
 You should see the login page
+
 ![login](login.png "Login Page")
 
 &nbsp;
