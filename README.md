@@ -116,7 +116,7 @@ Now listening on port 3000
 &nbsp;
 
 # Use Website
-Open a web browser and navigate to [http://localhost:300](http://localhost:300)
+Open a web browser and navigate to [http://localhost:300](http://localhost:3000)
 
 You should see the login page
 
